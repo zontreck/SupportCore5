@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <ApplicationIcon />
+    <StartupObject />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Configurations>Debug;Release;DebPub</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="libremetaverse\**" />
+    <EmbeddedResource Remove="libremetaverse\**" />
+    <None Remove="libremetaverse\**" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebPub|AnyCPU'">
+    <OutputPath>..\Bot\bin\debpub</OutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\OCB</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\OCB</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Octokit" Version="0.47.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="libremetaverse\LibreMetaverse.StructuredData\LibreMetaverse.StructuredData.csproj" />
+    <ProjectReference Include="libremetaverse\LibreMetaverse.Utilities\LibreMetaverse.Utilities.csproj" />
+    <ProjectReference Include="libremetaverse\LibreMetaverseTypes\LibreMetaverse.Types.csproj" />
+    <ProjectReference Include="libremetaverse\LibreMetaverse\LibreMetaverse.csproj" />
+    <ProjectReference Include="..\Bot\Bot.csproj" />
+  </ItemGroup>
+
+</Project>
