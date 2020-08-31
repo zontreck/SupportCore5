@@ -31,17 +31,24 @@ namespace SupportCore5
                                 Destinations source,
                                 UUID agentKey, string agentName)
         {
-            string TheString = "";
-            foreach(string s in additionalArgs)
+            try
             {
-                TheString += s + " ";
+
+                string TheString = "";
+                foreach (string s in additionalArgs)
+                {
+                    TheString += s + " ";
+                }
+
+                if (TheString.EndsWith(' ')) TheString.TrimEnd(' ');
+
+                SupportSettings.Instance.AutoReply = TheString;
+                MHE(source, client, "Auto reply set");
+                SupportSettings.SaveMemory();
+            }catch(Exception e)
+            {
+                MHE(source, client, e.Message+"\n\n"+e.StackTrace);
             }
-
-            if (TheString.EndsWith(' ')) TheString.TrimEnd(' ');
-
-            SupportSettings.Instance.AutoReply = TheString;
-            MHE(source, client, "Auto reply set");
-            SupportSettings.SaveMemory();
         }
     }
 }
