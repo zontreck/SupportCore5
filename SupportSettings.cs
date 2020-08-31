@@ -38,7 +38,9 @@ namespace SupportCore5
         {
             lock (filelock)
             {
-                return JsonConvert.DeserializeObject<SupportSettings>(File.ReadAllText("SupportCore5.json"));
+                if (File.Exists("SupportCore5.json"))
+                    return JsonConvert.DeserializeObject<SupportSettings>(File.ReadAllText("SupportCore5.json"));
+                else return new SupportSettings();
             }
         }
 
