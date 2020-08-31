@@ -16,7 +16,7 @@ namespace SupportCore5
                 return;
             } else
             {
-                if (SupportCore.Singleton.SupportActive)
+                if (!SupportCore.Singleton.SupportActive)
                 {
                     // Read the auto response from the auto reply text doc
 
@@ -31,24 +31,17 @@ namespace SupportCore5
                                 Destinations source,
                                 UUID agentKey, string agentName)
         {
-            try
+            string TheString = "";
+            foreach (string s in additionalArgs)
             {
-
-                string TheString = "";
-                foreach (string s in additionalArgs)
-                {
-                    TheString += s + " ";
-                }
-
-                if (TheString.EndsWith(' ')) TheString.TrimEnd(' ');
-
-                SupportSettings.Instance.AutoReply = TheString;
-                MHE(source, client, "Auto reply set");
-                SupportSettings.SaveMemory();
-            }catch(Exception e)
-            {
-                MHE(source, client, e.Message+"\n\n"+e.StackTrace);
+                TheString += s + " ";
             }
+
+            if (TheString.EndsWith(' ')) TheString.TrimEnd(' ');
+
+            SupportSettings.Instance.AutoReply = TheString;
+            MHE(source, client, "Auto reply set");
+            SupportSettings.SaveMemory();
         }
     }
 }
