@@ -32,9 +32,11 @@ namespace SupportCore5
             }
         }
 
+        private static readonly object filelock = new object();
+
         private static SupportSettings Load()
         {
-            lock (lck)
+            lock (filelock)
             {
                 return JsonConvert.DeserializeObject<SupportSettings>(File.ReadAllText("SupportCore5.json"));
             }
@@ -42,7 +44,7 @@ namespace SupportCore5
 
         public void Save()
         {
-            lock (lck)
+            lock (filelock)
             {
                 File.WriteAllText("SupportCore5.json", JsonConvert.SerializeObject(this, Formatting.Indented));
             }
@@ -50,7 +52,7 @@ namespace SupportCore5
 
         public static void SaveMemory()
         {
-            lock (lck)
+            lock (filelock)
             {
                 File.WriteAllText("SupportCore5.json", JsonConvert.SerializeObject(ins, Formatting.Indented));
             }
