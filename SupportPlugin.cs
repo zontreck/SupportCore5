@@ -29,6 +29,7 @@ namespace SupportCore5
 
         public void onIMEvent(object sender, InstantMessageEventArgs e)
         {
+            BotSession.Instance.grid.Self.IM -= onIMEvent;
         }
 
         public void passArguments(string data)
@@ -37,6 +38,9 @@ namespace SupportCore5
 
         public void run()
         {
+            // initialize / initiate the settings and singletons
+            SupportCore.Singleton.SupportActive = false;
+            SupportSettings.Instance.Save(); // read then save, or init then save
         }
     }
 }
