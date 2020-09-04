@@ -38,8 +38,9 @@ namespace SupportCore5
         {
             lock (filelock)
             {
-                if (File.Exists("SupportCore5.json"))
-                    return JsonConvert.DeserializeObject<SupportSettings>(File.ReadAllText("SupportCore5.json"));
+                if (File.Exists("SupportCore5.json")) File.Move("SupportCore5.json", Path.Combine("BotData", "SupportCore5.json"));
+                if (File.Exists("BotData/SupportCore5.json"))
+                    return JsonConvert.DeserializeObject<SupportSettings>(File.ReadAllText("BotData/SupportCore5.json"));
                 else return new SupportSettings();
             }
         }
@@ -48,7 +49,7 @@ namespace SupportCore5
         {
             lock (filelock)
             {
-                File.WriteAllText("SupportCore5.json", JsonConvert.SerializeObject(this, Formatting.Indented));
+                File.WriteAllText("BotData/SupportCore5.json", JsonConvert.SerializeObject(this, Formatting.Indented));
             }
         }
 
@@ -56,7 +57,7 @@ namespace SupportCore5
         {
             lock (filelock)
             {
-                File.WriteAllText("SupportCore5.json", JsonConvert.SerializeObject(ins, Formatting.Indented));
+                File.WriteAllText("BotData/SupportCore5.json", JsonConvert.SerializeObject(ins, Formatting.Indented));
             }
         }
 
