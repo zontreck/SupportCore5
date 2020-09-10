@@ -7,6 +7,6 @@ using LibZNI;
 [assembly: AssemblyCompany("ZNI")]
 [assembly: AssemblyAlgorithmId(System.Configuration.Assemblies.AssemblyHashAlgorithm.MD5)]
 [assembly: AssemblyCopyright("(C) 2020 Tara Piccari")]
-[assembly: AssemblyFileVersion("1.0.0.0501")]
+[assembly: AssemblyFileVersion("1.0.0.0502")]
 [assembly: AssemblyDescription("Support Core5 Plugin for BotCore")]
-[assembly: AutoUpdater("/job/ZBotCore/job/SupportCore5", "module.tar")]
+[assembly: AutoUpdater("/job/Bot", "!os!.tar")]
