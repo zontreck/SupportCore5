@@ -51,7 +51,7 @@ namespace SupportCore5
 
 
         [CommandGroup("ignoreAuthedUsers", 5, "ignoreauthedusers - Ignores all users that are authorized on the bot, and will not send them the auto response", Bot.Destinations.DEST_AGENT | Bot.Destinations.DEST_LOCAL | Bot.Destinations.DEST_GROUP)]
-        public void ignoreAuthedUsers(UUID client, int level, string[] additionalArgs,
+        public void f_ignoreAuthedUsers(UUID client, int level, string[] additionalArgs,
                                 Destinations source,
                                 UUID agentKey, string agentName)
         {
@@ -62,7 +62,7 @@ namespace SupportCore5
 
 
         [CommandGroup("unignoreAuthedUsers", 5, "unignoreauthedusers - UnIgnores all users that are authorized on the bot", Bot.Destinations.DEST_AGENT | Bot.Destinations.DEST_LOCAL | Bot.Destinations.DEST_GROUP)]
-        public void unignoreAuthedUsers(UUID client, int level, string[] additionalArgs,
+        public void f_unignoreAuthedUsers(UUID client, int level, string[] additionalArgs,
                                 Destinations source,
                                 UUID agentKey, string agentName)
         {
