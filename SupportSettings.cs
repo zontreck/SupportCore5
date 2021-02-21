@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using OpenMetaverse;
 
 
 namespace SupportCore5
@@ -63,5 +65,6 @@ namespace SupportCore5
 
 
         public string AutoReply { get; set; } = "Not configured";
+        public bool IgnoreAuthorizedUsers { get; set; } = false;
     }
 }

@@ -11,6 +11,10 @@ namespace SupportCore5
         [NotCommand(SourceType = Destinations.DEST_AGENT)]
         public void handle(string text, UUID User, string agentName, Destinations src, UUID originator)
         {
+            if (SupportSettings.Instance.IgnoreAuthorizedUsers)
+            {
+                if (MainConfiguration.Instance.BotAdmins.ContainsKey(User)) return;
+            }
             if(agentName == "Object")
             {
                 return;
@@ -27,7 +31,7 @@ namespace SupportCore5
 
 
         [CommandGroup("setsupportmsg", 5, "setsupportmsg [array:string] - Sets the support message (auto reply when support not active)", Bot.Destinations.DEST_AGENT | Bot.Destinations.DEST_LOCAL | Bot.Destinations.DEST_GROUP)]
-        public void makeNewChart(UUID client, int level, string[] additionalArgs,
+        public void setSupMsg(UUID client, int level, string[] additionalArgs,
                                 Destinations source,
                                 UUID agentKey, string agentName)
         {
@@ -41,6 +45,29 @@ namespace SupportCore5
 
             SupportSettings.Instance.AutoReply = TheString;
             MHE(source, client, "Auto reply set");
+            SupportSettings.SaveMemory();
+        }
+
+
+
+        [CommandGroup("ignoreAuthedUsers", 5, "ignoreauthedusers - Ignores all users that are authorized on the bot, and will not send them the auto response", Bot.Destinations.DEST_AGENT | Bot.Destinations.DEST_LOCAL | Bot.Destinations.DEST_GROUP)]
+        public void ignoreAuthedUsers(UUID client, int level, string[] additionalArgs,
+                                Destinations source,
+                                UUID agentKey, string agentName)
+        {
+            SupportSettings.Instance.IgnoreAuthorizedUsers = true;
+            MHE(source, client, "Ignoring authorized users!");
+            SupportSettings.SaveMemory();
+        }
+
+
+        [CommandGroup("unignoreAuthedUsers", 5, "unignoreauthedusers - UnIgnores all users that are authorized on the bot", Bot.Destinations.DEST_AGENT | Bot.Destinations.DEST_LOCAL | Bot.Destinations.DEST_GROUP)]
+        public void unignoreAuthedUsers(UUID client, int level, string[] additionalArgs,
+                                Destinations source,
+                                UUID agentKey, string agentName)
+        {
+            SupportSettings.Instance.IgnoreAuthorizedUsers = false;
+            MHE(source, client, "UnIgnoring authorized users!");
             SupportSettings.SaveMemory();
         }
     }
